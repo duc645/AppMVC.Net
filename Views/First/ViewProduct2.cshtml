@@ -1,0 +1,22 @@
+@*ViewProduct2 ko truyền dữ liệu bằng model mà truyền bằng viewdata.
+Nếu để nguyên thì model bằng null  *@
+
+@{
+    Layout = "_Layout";
+    var product = ViewData["product"] as ProductModel;//as ProductModel : là convert 
+    //sang kiểu ProductModel
+    
+}
+
+<p>@ViewData["Title"]</p>
+<div class="card bg-danger text-white">
+    
+    <h1 class="card-header">Xin chào 2 : @product.Name</h1>
+    <div class="card-body">
+       <p class="card-text">
+            Gía sanr phẩm : @product.Price
+                </p>
+                <p>@product.Id</p>
+    </div>
+</div>
+<hr>

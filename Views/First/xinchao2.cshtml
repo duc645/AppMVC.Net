@@ -1,0 +1,20 @@
+@* sử dụng chỉ @model để thiết lập kiểu dữ liệu nó truyền tới model
+và nó gán vào thuộc tính Model *@
+@model string
+@{
+    Layout = "_Layout";
+    
+}
+<div class="card bg-danger text-white">
+    <h1 class="card-header">Xin chào 2 : @Model</h1>
+    <div class="card-body">
+       <p class="card-text">
+         Bạn đang tìm hiểu về View trong asp net mvc
+
+        controller mvc
+       </p>
+    </div>
+</div>
+<hr>
+@* cho biết đường dẫn đến file này *@
+@this.Path

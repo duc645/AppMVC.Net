@@ -1,0 +1,17 @@
+@model cs68.Models.ProductModel
+
+@{
+    Layout = "_Layout";
+    
+}
+<div class="card bg-danger text-white">
+    
+    <h1 class="card-header">Xin chào 2 : @Model.Name</h1>
+    <div class="card-body">
+       <p class="card-text">
+            Gía sanr phẩm : @Model.Price
+                </p>
+                <p>@Model.Id</p>
+    </div>
+</div>
+<hr>
