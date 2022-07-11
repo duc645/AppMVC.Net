@@ -133,7 +133,12 @@ namespace cs68.Controllers {
             //đã được thiết lập trong file Startup
             return View("xinchao3",username);
         }
+        
 
+        //AcceptVerbs("POST") chi cho phep truy cap action = phuong thuc POST
+        //truy cap bang phuong thuc GET se ko vao dc
+        //neu muon dung phuong thuc khac de truy cap thi phai viet them vao
+        [AcceptVerbs("POST","GET")]
         public IActionResult ViewProduct(int? id){
             //Where là phương thức của list
             //p => p.Id = id : lấy ra sản phẩm mà sản phẩm đó có Id = id

@@ -1,0 +1,9 @@
+@using cs68.Models
+@model List<ProductModel>
+<h1>Danh sách sản phẩm</h1>
+<ul>
+    @foreach (var product in Model)
+    {
+        <li><a href="#">@product.Name</a></li>
+    }
+</ul>

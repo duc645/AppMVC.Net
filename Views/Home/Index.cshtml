@@ -1,8 +1,67 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    @*  Url.Action
+     Url.ActionLink
+
+
+    //2 phương thúc này sử dụng tên route để tạo url theo route đó
+      Url.RouteUrl() 
+       Url.Link
+
+
+    // <a> <form> <button> =>TagHelper : asp-area ,
+ // asp-route-.. (tham số của route, asp-route-name,asp-route-id) ,asp-route
+ *@
+
 }
 <partial name="_AlertMessage"></partial>
 <div class="text-center">
     <h1 class="display-4">Xin chào</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<p>
+    @* Lấy Url của action privacy *@
+    @Url.Action("Privacy",new {id=123 , name = "duc",phone="09323245468"})
+</p>
+<p>
+
+    @Url.Action("Venus","Planet")
+</p>
+
+<p>
+
+    @Url.Action("PlanetInfo","Planet", new {id=3})
+</p>
+
+<p>
+    @* nếu controller nằm trong area thì phải khai báo
+    trong phần tham số *@
+    @Url.Action("Index","Product", new {area ="ProductManage",id = 123,name="duc"})
+</p>
+<p>
+    @Url.RouteUrl("default", new { action ="HelloView ", Controller = "Home", id=123, name="duc"})
+</p>
+
+<p>
+    @Url.RouteUrl("venus2")
+</p>
+
+@{
+    var routedata= new Dictionary<string,string>(){
+        {"name","duc"},
+        {"abc","abc"},
+        {"id","3"}
+
+        };
+}
+@* nếu nhiều tham số thì có thể dùng 
+asp-all-route-data để gộp, tham số truyền vào là 
+đối tượng kiểu Dictionary,có thể bỏ đi các asp-route-.... bên dưới *@
+    @* asp-route-name="duc"
+    asp-route-abc="abc"
+ asp-route-id="3" *@
+<a asp-action ="PlanetInfo" asp-controller = "Planet" asp-area = ""
+ asp-all-route-data="@routedata">vi du 1 : </a>
+
+ <a asp-action ="Index" asp-controller = "Product" asp-area = "ProductManage" >vi du 2</a>

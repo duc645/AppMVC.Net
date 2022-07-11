@@ -1,0 +1,26 @@
+@using cs68.Models
+@model List<ProductModel>
+@* chỉ cần thiết lập viewstart là tất cả các view con 
+tự động kế thừa layout *@
+<h1>Danh sách sản phẩm</h1>
+<ul>
+    @foreach (var product in Model)
+    {
+        <li><a href="#">@product.Name</a></li>
+    }
+</ul>
+
+<p>
+    @* nếu ko truyền gì vào thì nó sẽ lấy controller và action hiện tại *@
+    @Url.ActionLink()
+</p>
+
+<p>
+    @* dùng .Action thì ko có phần host ở đầu*@
+    @Url.Action()
+</p>
+
+<p>
+    @* Lấy Url của action privacy *@
+    @Url.Action("Privacy")
+</p>

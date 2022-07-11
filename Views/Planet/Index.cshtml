@@ -1,0 +1,19 @@
+@* inject dịch vụ vào view và lưu tại biến planetService *@
+@inject cs68.Services.PlanetService planetService
+<h1>Các hành tinh trong hệ mặt trời</h1>
+<div class="list-group">
+    @foreach (var planet in planetService)
+    {
+    <a class="list-group-item list-group-item-action" aso-controller="Planet" asp-action="@planet.Name">@planet.VnName - @planet.Name</a>
+    }
+</div>
+<p>
+    @Url.RouteUrl("venus1")
+</p>
+<p>
+    @Url.RouteUrl("venus2")
+
+</p>
+<p>
+    @Url.RouteUrl("venus3")
+</p>
