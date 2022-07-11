@@ -1,0 +1,63 @@
+@using Microsoft.EntityFrameworkCore
+@using System.Data
+@* @using cs68.models *@
+@inject cs68.models.AppDbContext dbContext
+@{
+    ViewData["Title"] = "Thông tin db";
+    var connect = dbContext.Database.GetDbConnection();
+    var dbname = connect.Database;//lấy ra tên db
+    
+    //cái này trả về true,false
+    //nếu bằng true thì có thể kết nối để truy vấn csdl
+    //nếu bằng false thì csdl có thể đang ko chạy, hoặc csdl ko tồn tại ,....
+    var can_connect = dbContext.Database.CanConnect();
+
+    //lấy ra các thông tin migration
+    //lấy các migration ở trạng thái Pending
+    dbContext.Database.GetPendingMigrations();
+    //Các migration đã đc cập nhật lên sqlServer
+    dbContext.Database.GetAppliedMigrations();
+    
+}
+
+<partial name="_AlertMessage"></partial>
+<h1>Thông tin</h1>
+<p> -Database: @dbname</p>
+@* địa chỉ kết nối *@
+<p> -Source: @connect.DataSource</p>
+
+<p> -State: @connect.State</p>
+<hr>
+<h2>Migrations</h2>
+@foreach (var migration in dbContext.Database.GetAppliedMigrations())
+{
+    <p>@migration</p>
+}
+@foreach (var migration in dbContext.Database.GetPendingMigrations())
+{
+    <p>@migration (pending)</p>
+}
+
+@if(!can_connect){
+    <p class="alert alert-danger">Không có khả năng kết nối đến Database</p>
+}
+@* nếu có migration ở trạng thái Pending *@
+@if(dbContext.Database.GetPendingMigrations().Any()){
+    <form method="post">
+        <button class="btn btn-primary" asp-action="Migrate">Tạo Db(Cập nhật migrations)</button>
+    </form>
+    
+}
+
+@if(can_connect){
+    <h3>Các bảng </h3>
+   await dbContext.Database.OpenConnectionAsync();
+   var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
+    <ul>
+   @foreach(System.Data.DataRow row in table.Rows){
+    <li>@row["TABLE_NAME"]</li>
+   }
+   </ul>
+
+   <a class="btn btn-danger" asp-action="DeleteDb">Xóa database : @dbname</a>
+}
