@@ -1,3 +1,4 @@
+using cs68.models.Contacts;
 using Microsoft.EntityFrameworkCore;
 // using Microsoft.EntityFrameworkCore.DbContext;
 namespace cs68.models{
@@ -25,7 +26,7 @@ namespace cs68.models{
         //     }
        }
 
-
+        public DbSet<Contact> Contacts {set;get;}
         //public DbSet<Article> articles{get;set;} 
        //Dbset la mot tap hop chua cac phan tu kieu Article
        //khai bao nhu nay thi trong csdl se co bang articles, co cac dong theo kieu du lieu Article
